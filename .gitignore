@@ -1,0 +1,14 @@
+docs/_build/*
+media/
+.DS_Store
+pdf/*
+.vscode
+*.sublime-*
+.terraform*
+terraform.tfstate*
+*.rpm
+*.swp
+*.crt
+*.p12
+*.key
+.virtualenv
