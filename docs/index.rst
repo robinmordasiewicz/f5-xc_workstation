@@ -6,7 +6,6 @@ Course and Lab Access
 =====================
 
 .. toctree::
-   :hidden:
 
 .. topic:: Course and Lab Access
 
