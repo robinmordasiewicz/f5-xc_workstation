@@ -17,6 +17,30 @@ Workstation
 
    .. tabs::
 
+      .. tab:: openssl
+    
+         .. code-block:: diff
+            :caption: openssl - https://gist.github.com/rdh27785/97210d439a280063bd768006450c435d
+
+            --- /etc/ssl/openssl.cnf~original	2022-03-16 08:35:51.000000000 +0000
+            +++ /etc/ssl/openssl.cnf	2022-05-04 02:37:30.336530711 +0000
+            @@ -56,6 +56,7 @@
+             # List of providers to load
+             [provider_sect]
+             default = default_sect
+            +legacy = legacy_sect
+             # The fips section name should match the section name inside the
+             # included fipsmodule.cnf.
+             # fips = fips_sect
+            @@ -69,7 +70,9 @@
+             # OpenSSL may not work correctly which could lead to significant system
+             # problems including inability to remotely access the system.
+             [default_sect]
+             -# activate = 1
+             +activate = 1
+             +[legacy_sect]
+             +activate = 1
+
       .. tab:: kubectl
 
          .. code-block:: console
@@ -110,10 +134,34 @@ Workstation
             $ sudo apt install -y build-essential curl file git
             $ sudo apt install -y zsh
             $ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-            $ git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-            $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-            $ chsh -s $(which zsh)
+            $ git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/plugins/zsh-autosuggestions
+            $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting
             $ apt install fonts-powerline -y
+            $ chsh -s $(which zsh)
+
+      .. tab:: vim
+         
+         .. code-block:: console
+            :caption: configure vim
+
+            $ cat <<EOF > ~/.vimrc
+            " Install vim-plug if not found
+            if empty(glob('~/.vim/autoload/plug.vim'))
+              silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+            endif
+
+            " Run PlugInstall if there are missing plugins
+            autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+              \| PlugInstall --sync | source $MYVIMRC
+            \| endif
+
+            call plug#begin('~/.vim/plugged')
+            Plug 'vim-airline/vim-airline'
+            Plug 'vim-airline/vim-airline-themes'
+            call plug#end()
+            let g:airline_powerline_fonts = 1
+            EOF
 
       .. tab:: powerline
 
