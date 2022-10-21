@@ -91,7 +91,7 @@ Workstation
          .. code-block:: console
             :caption: Install to use sponge
 
-            $ sudo apt get install --yes moreutils
+            $ sudo apt-get install --yes moreutils
 
 .. collapse:: Console Environment
 
