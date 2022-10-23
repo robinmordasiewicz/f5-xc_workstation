@@ -117,6 +117,16 @@ Workstation
 
             $ sudo apt-get install --yes moreutils
 
+      .. tab:: sphinx
+
+         .. code-block:: console
+            :caption: Install sphinx
+
+            $ sudo apt-get -y install python3-sphinx
+            $ sudo apt -y install python3-pip
+            $ pip install sphobjinv
+            $ sudo apt -y install python3.9
+
 .. collapse:: Console Environment
 
    .. tabs::
